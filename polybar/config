@@ -53,11 +53,16 @@ module-margin-right = 2
 
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+;font-2 = siji:pixelsize=10;1
+
+:font-0 = FiraGO:size=11;2
+;font-1 = "Font Awesome 5 Free:style=Regular:pixelsize=11;2"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=11;2"
+font-3 = "Font Awesome 5 Brands:pixelsize=11;2"
 
 modules-left = bspwm i3
 modules-center =
-modules-right = filesystem xbacklight pulseaudio alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right =  filesystem xbacklight pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -85,7 +90,7 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-prefix-underline = ${colors.secondary}
 
@@ -96,6 +101,13 @@ label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
 label-indicator-underline = ${colors.secondary}
+
+[module/keyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+
+label-layout = %{T3}%{T-} %layout%
 
 [module/filesystem]
 type = internal/fs
@@ -184,7 +196,9 @@ label-song-ellipsis = true
 type = internal/xbacklight
 
 format = <label> <bar>
-label = BL
+label = 
+
+
 
 bar-width = 10
 bar-indicator = |
@@ -205,7 +219,7 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #f90000
 label = %percentage:2%%
@@ -213,7 +227,7 @@ label = %percentage:2%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label = %percentage_used%%
@@ -225,7 +239,7 @@ interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
-label-connected = %essid% %downspeed% %upspeed%
+label-connected = %essid%  %downspeed%  %upspeed%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -233,11 +247,11 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = 0
-ramp-signal-1 = 1
-ramp-signal-2 = 2
-ramp-signal-3 = 3
-ramp-signal-4 = 4
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+;ramp-signal-4 = 
 ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
@@ -248,7 +262,7 @@ interval = 3.0
 format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip% %downspeed% %upspeed%
+label-connected = %local_ip%  %downspeed%  %upspeed%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -266,22 +280,40 @@ date-alt = " %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
+;format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #0a6cf5
 
 label = %date% %time%
 
+[module/pulseaudio2]
+type = internal/pulseaudio
+
+format-volume = <ramp-volume> <label-volume>
+use-ui-max = false
+
+label-muted =  MUTE
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
+format-volume = <ramp-volume> <label-volume> <bar-volume>
+;label-volume = VOL %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted = 🔇 muted
+use-ui-max = false
+
+label-muted =  muted
 label-muted-foreground = #666
-click-right = pavucontrol
+click-right = exec pavucontrol
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -307,7 +339,7 @@ format-volume = <label-volume> <bar-volume>
 label-volume = VOL
 label-volume-foreground = ${root.foreground}
 
-format-muted-prefix = " "
+format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
 
@@ -344,14 +376,18 @@ format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
 animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
 
@@ -383,31 +419,31 @@ ramp-foreground = ${colors.foreground-alt}
 [module/powermenu]
 type = custom/menu
 
-expand-right = true
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
+label-open =  
+label-close = 
 label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
 
-menu-0-0 = reboot
+menu-0-0 = 
 menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
+menu-1-0 = No
 menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
+menu-1-1 = Yes
+menu-1-1-exec = systemctl suspend
 
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
+menu-0-1 = 
+menu-0-1-exec = menu-open-2
+menu-2-0 = Yes
+menu-2-0-exec = reboot
+menu-2-1 = No
 menu-2-1-exec = menu-open-0
+
+menu-0-2 = 
+menu-0-2-exec = menu-open-3
+menu-3-0 = Yes
+menu-3-0-exec = shutdown now
+menu-3-1 = No
+menu-3-1-exec = menu-open-0
+
 
 [settings]
 screenchange-reload = true

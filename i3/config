@@ -18,6 +18,7 @@ font pango:monospace 8
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono 8
+#font pango:FiraGO 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -33,12 +34,13 @@ floating_modifier $mod
 bindsym $mod+Return exec xfce4-terminal
 
 ################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
+##                                      sound-section                                         ##
 ################################################################################################
 
 #exec --no-startup-id volumeicon
 exec --no-startup-id pulseaudio
-exec --no-startup-id pkill pulseaudio && pulseaudio --start &
+exec --no-startup-id pkill pulseaudio
+exec --no-startup-id pulseaudio --start
 #exec --no-startup-id pa-applet
 bindsym $mod+Ctrl+m exec pavucontrol
 
@@ -63,8 +65,8 @@ bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up
 bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Volume controll
-bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume 0 +5%; notify-send 'volume up'"
-bindsym XF86AudioLowerVolume exec "pactl set-sink-volume 0 -5%; notify-send 'volume down'"
+bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume 0 +5%; dunstify 'volume up'"
+bindsym XF86AudioLowerVolume exec "pactl set-sink-volume 0 -5%; dunstify 'volume down'"
 
 # Start applications
 bindsym $mod+F2 exec chromium
@@ -82,13 +84,29 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec --no-startup-id dunst
-exec --no-startup-id nitrogen --restore &
+exec --no-startup-id nitrogen --restore
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# drun
+bindsym $mod+d exec --no-startup-id ~/bin/rofi.sh -d
+
+# clipmenu
+#bindsym $alt+v exec --no-startup-id ~/bin/rofi.sh -l
+
+# calc
+bindsym $mod+c exec --no-startup-id ~/bin/rofi.sh -c
+
+# NetworkManager
+bindsym $mod+n exec --no-startup-id ~/bin/rofi.sh -n
+
+# Power-menu
+#bindsym $mod+e exec --no-startup-id ~/bin/rofi.sh -p
+
+
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
