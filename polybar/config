@@ -60,9 +60,9 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=11;2"
 font-3 = "Font Awesome 5 Brands:pixelsize=11;2"
 
-modules-left = bspwm i3
+modules-left = bspwm i3 xwindow
 modules-center =
-modules-right =  filesystem xbacklight pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = filesystem xbacklight pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -84,7 +84,7 @@ cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:0:100:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -407,8 +407,8 @@ format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
-label = %temperature-c%
-label-warn = %temperature-c%
+label =  %temperature-c%
+label-warn =  %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
 ramp-0 = 
@@ -444,6 +444,18 @@ menu-3-0-exec = shutdown now
 menu-3-1 = No
 menu-3-1-exec = menu-open-0
 
+[module/updates]
+type = custom/script
+exec = ~/.config/polybar/scripts/yay-polybar/updates-arch-yay.sh
+interval = 600
+click-left = i3-msg exec ~/.config/polybar/yay-polybar/notify-updates.sh
+click-right = i3-msg exec ~/.config/polybar/yay-polybar/prompt-updates.sh
+
+[module/kernel]
+type = custom/script
+exec = uname -r
+tail = false
+interval = 1024
 
 [settings]
 screenchange-reload = true
