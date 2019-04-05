@@ -56,12 +56,17 @@ bindsym XF86AudioLowerVolume exec "pactl set-sink-volume 0 -5%; dunstify 'volume
 
 bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+F2 exec chromium
-bindsym $mod+F3 exec thunar
+#bindsym $mod+F3 exec thunar
+bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F4 exec xfce4-terminal -e ranger
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+bindsym $mod+F5 exec xfce4-terminal -e calcurse
 
 # drun
 bindsym $mod+d exec --no-startup-id "rofi -show drun -modi drun,window,run -bw 2 -lines 12 -width 1152 -columns 3 -sidebar-mode -show-icons true"
+
+bindsym $mod+p exec "xrandr | grep 'VGA-0 connected' && xrandr --output LVDS-0 --auto --output VGA-0 --auto --r-of LVDS-0"
 
 ################################################################################################
 ##                                  Autostart applications                                    ##
