@@ -19,6 +19,10 @@ floating_modifier $mod
 
 new_window 1pixel
 
+# move focused workspace between monitors
+bindsym $mod+Ctrl+greater move workspace to output right
+bindsym $mod+Ctrl+less move workspace to output left
+
 ################################################################################################
 ##                                      sound-section                                         ##
 ################################################################################################
@@ -60,20 +64,22 @@ bindsym $mod+F2 exec chromium
 bindsym $mod+F3 exec pcmanfm
 bindsym $mod+F4 exec termite -e ranger
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+bindsym $mod+Print exec flameshot gui
+bindsym $mod+Shift+Print exec flameshot full -p ~
 bindsym $mod+F5 exec termite -e calcurse
 
 # drun
-bindsym $mod+d exec --no-startup-id "rofi -show drun -modi drun,window,run -bw 2 -lines 12 -width 1152 -columns 3 -sidebar-mode -show-icons true"
+bindsym $mod+d exec --no-startup-id "rofi -show drun -modi drun,run -bw 2 -lines 12 -width 1152 -columns 3 -sidebar-mode -show-icons true"
 
-bindsym $mod+p exec "xrandr | grep 'VGA-0 connected' && xrandr --output LVDS-0 --auto --output VGA-0 --auto --r-of LVDS-0"
+bindsym $mod+p exec "xrandr | grep 'VGA-0 connected' && xrandr --output LVDS-0 --auto --output VGA-0 --auto --right-of LVDS-0"
 
 ################################################################################################
 ##                                  Autostart applications                                    ##
 ################################################################################################
 exec "setxkbmap -layout pl"
+exec "udiskie --tray --use-udisks2"
 exec --no-startup-id nitrogen --restore
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -81,7 +87,7 @@ exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec --no-startup-id dunst
 exec --no-startup-id nitrogen --restore
-
+exec --no-startup-id flameshot &
 ################################################################################################
 ##                           i3 windows and workspace management                              ##
 ################################################################################################
@@ -112,6 +118,9 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+# togle between spawning windows horizontaly/verticaly
+bindsym $mod+t	split toggle
 
 # split in horizontal orientation
 bindsym $mod+h split h
@@ -202,6 +211,9 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+
+for_window [class="Yad" title="yad-calendar"] floating enable
 
 ################################################################################################
 ##                                 reload/restart/exit i3                                     ##
